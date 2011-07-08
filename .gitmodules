@@ -19,9 +19,6 @@
 [submodule "bundle/camelcase"]
 	path = bundle/camelcase
 	url = https://github.com/vim-scripts/camelcasemotion.git
-[submodule "bundle/rainbowparenthsis"]
-	path = bundle/rainbowparenthsis
-	url = https://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git
 [submodule "bundle/matchparenpp"]
 	path = bundle/matchparenpp
 	url = https://github.com/vim-scripts/matchparenpp.git
