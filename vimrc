@@ -54,7 +54,7 @@ set noswapfile
 set autowrite
 
 " Improve smoothness of redrawing (indicates a fast terminal connection)
-set ttyfast
+" set ttyfast
 
 " Use UTF-8 as the default buffer encoding
 set encoding=utf-8
@@ -141,10 +141,10 @@ vnoremap < <gv
 vnoremap > >gv 
 
 " Bubble lines
-nmap <C-Up> [e
-nmap <C-Down> ]e
-vmap <C-Up> [egv
-vmap <C-Down> ]egv
+nmap <C-A-k> [e
+nmap <C-A-j> ]e
+vmap <C-A-k> [egv
+vmap <C-A-j> ]egv
 
 " map <Alt-p> and <Alt-P> to paste below/above and reformat
 nnoremap <Esc>P  P'[v']=
@@ -172,7 +172,7 @@ vnoremap <Tab> %
 " No longer need to press the Shift key for commands
 nnoremap ; :
 
-" Ctrl-x/z deletes blank line below/above, and Ctrl-j/k inserts.
+" Alt-x/z deletes blank line below/above, and Alt-j/k inserts.
 nnoremap <silent><A-x> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><A-z> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
@@ -207,7 +207,7 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 
 " Autostrip trailing whitespace
-autocmd BufWritePre *.php, *.js, *.html, *.py, *.pl, *.pm :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.php :call <SID>StripTrailingWhitespaces()
 
 " Go back to the position the cursor was on the last time this file was edited
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal `\"")|endif
