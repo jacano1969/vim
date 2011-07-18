@@ -12,7 +12,7 @@ filetype plugin indent on       " enable detection, plugins and indenting in one
 let mapleader = ","
 
 " Avoid loading MatchParen plugin
-let loaded_matchparen = 1
+" let loaded_matchparen = 1
 
 " Turn syntax highlighting on
 syntax on
@@ -130,11 +130,10 @@ vnoremap / /\v
 " Map Gundo to ,u
 nnoremap <leader>u :GundoToggle<CR>
 
-" Switch windows quickly
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" Remap filetab controls
+map  <C-l> :tabn<CR>
+map  <C-h> :tabp<CR>
+map  <C-t> :tabnew<CR>
 
 " Visual shifting
 vnoremap < <gv
