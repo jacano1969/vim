@@ -138,6 +138,15 @@ nnoremap <leader>ct :CommandTFlush<CR>
 map  <C-l> :tabn<CR>
 map  <C-h> :tabp<CR>
 map  <C-t> :tabnew<CR>
+map <A-1> 1gt
+map <A-2> 2gt
+map <A-3> 3gt
+map <A-4> 4gt
+map <A-5> 5gt
+map <A-6> 6gt
+map <A-7> 7gt
+map <A-8> 8gt
+map <A-9> 9gt
 
 " Visual shifting
 vnoremap < <gv
