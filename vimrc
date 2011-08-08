@@ -123,12 +123,16 @@ set textwidth=0
 " Easily edit the vimrc file with ,ev
 nmap <leader>ev :e $MYVIMRC<CR>
 
-" Use non-vim regexes when searching
-nnoremap / /\v
-vnoremap / /\v
+" Indent cursor in block after {[( characters
+inoremap {<CR> {<CR>}<C-O>O
+inoremap [<CR> [<CR>]<C-O>O
+inoremap (<CR> (<CR>)<C-O>O
 
 " Map Gundo to ,u
 nnoremap <leader>u :GundoToggle<CR>
+
+"Map CommandTFlush to ,ct 
+nnoremap <leader>ct :CommandTFlush<CR>
 
 " Remap filetab controls
 map  <C-l> :tabn<CR>

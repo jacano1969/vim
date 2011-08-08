@@ -20,21 +20,6 @@ setlocal errorformat=%m\ in\ %f\ on\ line\ %l
 " Use pman for manual pages
 setlocal keywordprg=pman
 
-" More common in PEAR coding standard
-" inoremap <buffer>  { {<CR>}<C-O>O
-" Maybe this way in other coding standards
-inoremap  { {<CR>}<C-O>O
-
-inoremap <buffer> [ []<LEFT>
-
-" Standard mapping after PEAR coding standard
-"inoremap <buffer> ( (  )<LEFT><LEFT>
-" Maybe this way in other coding standards
-"inoremap ( ()<LEFT>
-
-"inoremap <buffer> " ""<LEFT>
-"inoremap <buffer> ' ''<LEFT>
-
 :vnoremap <buffer> ( "zdi(<C-R>z)<ESC>
 :vnoremap <buffer> { "zdi{<C-R>z}<ESC>
 :vnoremap <buffer> [ "zdi[<C-R>z]<ESC>
