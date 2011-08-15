@@ -83,6 +83,9 @@ set wildmenu
 "   - on second <Tab>, complete the next full match and show menu
 set wildmode=list:longest,full
 
+" Ignore node_modules files
+set wildignore+=node_modules/**
+
 " Remember things between sessions
 "
 " '20  - remember marks for 20 previous files
