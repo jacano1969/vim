@@ -123,6 +123,9 @@ set backspace=indent,eol,start
 set nowrap
 set textwidth=0
 
+" Show current git branch
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
 " Easily edit the vimrc file with ,ev
 nmap <leader>ev :e $MYVIMRC<CR>
 
