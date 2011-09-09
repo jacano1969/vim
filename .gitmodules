@@ -49,3 +49,6 @@
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive
+[submodule "bundle/commandt"]
+	path = bundle/commandt
+	url = git://git.wincent.com/command-t.git

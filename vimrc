@@ -230,6 +230,8 @@ endfun
 " Autostrip trailing whitespace
 autocmd BufWritePre *.php :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre *.js :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.tcl :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.adp :call <SID>StripTrailingWhitespaces()
 
 " Go back to the position the cursor was on the last time this file was edited
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal `\"")|endif
@@ -237,6 +239,9 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal 
 " Enable folding without the use of markers
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview 
+
+" Enable syntax highlighting for adp files
+au BufNewFile,BufRead *.adp set filetype=html
 
 " Set font
 set gfn=Inconsolata-dz\ 10
