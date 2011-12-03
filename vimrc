@@ -11,6 +11,9 @@ filetype plugin indent on       " enable detection, plugins and indenting in one
 " Set the <Leader> for combo commands
 let mapleader = ","
 
+" Make sure the latex plugin loads properly
+"let g:tex_flavor='latex'
+
 " Avoid loading MatchParen plugin
 " let loaded_matchparen = 1
 
@@ -123,6 +126,9 @@ set backspace=indent,eol,start
 set nowrap
 set textwidth=0
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 " Show current git branch
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
@@ -203,7 +209,7 @@ nnoremap <leader>v V`]
 nnoremap <leader>s <C-w>v<C-w>l
 
 " Ack - betterthangrep.com
-nnoremap <leader>A :Ack
+nnoremap <leader>z :Ack
 
 " Sorts CSS (content between the braces)
 nmap <F7> :g#\({\n\)\@<=#.,/}/sort<CR>
@@ -230,6 +236,8 @@ endfun
 " Autostrip trailing whitespace
 autocmd BufWritePre *.php :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre *.js :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.md :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.py :call <SID>StripTrailingWhitespaces()
 
 " Go back to the position the cursor was on the last time this file was edited
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal `\"")|endif
@@ -240,6 +248,8 @@ au BufWinEnter * silent! loadview
 
 " Set font
 set gfn=Inconsolata-dz\ 10
+
+set wildignore+=app/public/js/src/dojo-1.6.1/**,app/public/js/src/dojo-release-1.7.0-src/**
 
 " Gvim settings
 if has("gui_running")
@@ -254,5 +264,5 @@ if has("gui_running")
     set guioptions-=LlRrb
 
     " Set size
-    set lines=38 columns=160
+    set lines=50 columns=177
 endif

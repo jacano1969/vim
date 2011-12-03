@@ -22,9 +22,6 @@
 [submodule "bundle/matchparenpp"]
 	path = bundle/matchparenpp
 	url = https://github.com/vim-scripts/matchparenpp.git
-[submodule "bundle/autoclose"]
-	path = bundle/autoclose
-	url = https://github.com/vim-scripts/AutoClose.git
 [submodule "bundle/lusty"]
 	path = bundle/lusty
 	url = https://github.com/sjbach/lusty.git
@@ -49,3 +46,12 @@
 [submodule "bundle/fugitive"]
 	path = bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive
+[submodule "bundle/latex"]
+	path = bundle/latex
+	url = https://github.com/jcf/vim-latex.git
+[submodule "bundle/syntastic"]
+	path = bundle/syntastic
+	url = https://github.com/scrooloose/syntastic/
+[submodule "bundle/delimitmate"]
+	path = bundle/delimitmate
+	url = https://github.com/Raimondi/delimitMate.git
