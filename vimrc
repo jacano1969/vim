@@ -188,6 +188,8 @@ nmap <leader>a= :Tab /=><CR>
 vmap <leader>a= :Tab /=><CR>
 nmap <leader>a: :Tab /:<CR>
 vmap <leader>a: :Tab /:<CR>
+nmap <leader>a- :Tab /=<CR>
+vmap <leader>a- :Tab /=<CR>
 
 " Jump to matching pairs easily with Tab
 nnoremap <Tab> %
@@ -238,6 +240,10 @@ autocmd BufWritePre *.php :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre *.js :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre *.md :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre *.py :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.html :call <SID>StripTrailingWhitespaces()
+
+" Don't display annoying popup every time a file changes
+autocmd FileChangedShell * echohl WarningMsg | echo "File changed shell." | echohl None
 
 " Go back to the position the cursor was on the last time this file was edited
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal `\"")|endif
@@ -246,10 +252,18 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal 
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview 
 
+" Disable folding
+set nofoldenable
+
 " Set font
 set gfn=Inconsolata-dz\ 10
 
-set wildignore+=app/public/js/src/dojo-1.6.1/**,app/public/js/src/dojo-release-1.7.0-src/**
+" Disable bell
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+" Ignore Dojo files in CommandT
+set wildignore+=app/public/js/src/dojo-1.6.1,app/public/js/src/dojo-1.6.1-src,app/public/js/release
 
 " Gvim settings
 if has("gui_running")
