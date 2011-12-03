@@ -57,4 +57,4 @@
 	url = https://github.com/Raimondi/delimitMate.git
 [submodule "bundle/commandt"]
 	path = bundle/commandt
-	url = git://git.wincent.com/command-t.git
+	url = https://github.com/wincent/Command-T.git
