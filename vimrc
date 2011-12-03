@@ -182,6 +182,8 @@ nmap <leader>a= :Tab /=><CR>
 vmap <leader>a= :Tab /=><CR>
 nmap <leader>a: :Tab /:<CR>
 vmap <leader>a: :Tab /:<CR>
+nmap <leader>a- :Tab /=<CR>
+vmap <leader>a- :Tab /=<CR>
 
 " Jump to matching pairs easily with Tab
 nnoremap <Tab> %
@@ -230,8 +232,10 @@ endfun
 " Autostrip trailing whitespace
 autocmd BufWritePre *.php :call <SID>StripTrailingWhitespaces()
 autocmd BufWritePre *.js :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.tcl :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.adp :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.html :call <SID>StripTrailingWhitespaces()
+
+" Don't display annoying popup every time a file changes
+autocmd FileChangedShell * echohl WarningMsg | echo "File changed shell." | echohl None
 
 " Go back to the position the cursor was on the last time this file was edited
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal `\"")|endif
@@ -240,11 +244,18 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal 
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview 
 
-" Enable syntax highlighting for adp files
-au BufNewFile,BufRead *.adp set filetype=html
+" Disable folding
+set nofoldenable
 
 " Set font
 set gfn=Inconsolata-dz\ 10
+
+" Disable bell
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+" Ignore Dojo files in CommandT
+set wildignore+=app/public/js/src/dojo-1.6.1,app/public/js/src/dojo-1.6.1-src,app/public/js/release
 
 " Gvim settings
 if has("gui_running")
