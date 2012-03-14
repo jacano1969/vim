@@ -67,3 +67,6 @@
 [submodule "bundle/yankring"]
 	path = bundle/yankring
 	url = git://github.com/vim-scripts/YankRing.vim.git
+[submodule "bundle/clojure"]
+	path = bundle/clojure
+	url = https://github.com/vim-scripts/VimClojure.git
