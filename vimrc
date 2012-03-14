@@ -4,8 +4,7 @@ set nocompatible
 " Use pathogen to easily modify the runtime path to include all
 " plugins under the ~/.vim/bundle directory
 filetype off                    " force reloading *after* pathogen loaded
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 
 " Set the <Leader> for combo commands
@@ -21,7 +20,7 @@ let mapleader = ","
 syntax on
 
 " Set color scheme
-set background=light
+set background=dark
 colorscheme solarized
 
 " Hide buffers instead of closing them
@@ -71,6 +70,9 @@ set showcmd
 " Always show what mode we're currently editing in
 set showmode
 
+" Highlight 80th column
+set cc=80
+
 " Jump 5 lines when running out of screen real estate
 set scrolljump=5
 
@@ -86,14 +88,14 @@ set wildmenu
 "   - on second <Tab>, complete the next full match and show menu
 set wildmode=list:longest,full
 
-" Ignore node_modules files
-set wildignore+=node_modules/**
+" Ignore node_modules and ruby gems files
+set wildignore+=node_modules/**,vendor/bundle
 
 " Remember things between sessions
 "
 " '20  - remember marks for 20 previous files
-" \"80 - save 50 lines for each register
-" :100  - remember 80 items in command-line history 
+" \"80 - save 80 lines for each register
+" :100  - remember 100 items in command-line history
 " %    - remember the buffer list (if vim started without a file arg)
 " n    - set name of viminfo file
 set viminfo='20,\"80,:100,%,n~/.viminfo
@@ -143,7 +145,7 @@ inoremap (<CR> (<CR>)<C-O>O
 " Map Gundo to ,u
 nnoremap <leader>u :GundoToggle<CR>
 
-"Map CommandTFlush to ,ct 
+"Map CommandTFlush to ,ct
 nnoremap <leader>ct :CommandTFlush<CR>
 
 " Remap filetab controls
@@ -162,7 +164,7 @@ map <A-9> 9gt
 
 " Visual shifting
 vnoremap < <gv
-vnoremap > >gv 
+vnoremap > >gv
 
 " Bubble lines
 nmap <C-A-k> [e
@@ -236,11 +238,7 @@ fun! <SID>StripTrailingWhitespaces()
 endfun
 
 " Autostrip trailing whitespace
-autocmd BufWritePre *.php :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.js :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.md :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.py :call <SID>StripTrailingWhitespaces()
-autocmd BufWritePre *.html :call <SID>StripTrailingWhitespaces()
+autocmd BufWritePre *.* :call <SID>StripTrailingWhitespaces()
 
 " Don't display annoying popup every time a file changes
 autocmd FileChangedShell * echohl WarningMsg | echo "File changed shell." | echohl None
@@ -250,7 +248,7 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal 
 
 " Enable folding without the use of markers
 au BufWinLeave * silent! mkview
-au BufWinEnter * silent! loadview 
+au BufWinEnter * silent! loadview
 
 " Disable folding
 set nofoldenable
@@ -263,7 +261,7 @@ set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
 " Ignore Dojo files in CommandT
-set wildignore+=app/public/js/src/dojo-1.6.1,app/public/js/src/dojo-1.6.1-src,app/public/js/release
+set wildignore+=app/public/js/src/dojo-1.6.1,app/public/js/src/dojo-1.6.1-src,app/public/js/release,app/resource/data/node_connections,app/public/img/nodes
 
 " Gvim settings
 if has("gui_running")
