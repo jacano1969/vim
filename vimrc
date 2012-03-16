@@ -10,6 +10,9 @@ filetype plugin indent on       " enable detection, plugins and indenting in one
 " Set the <Leader> for combo commands
 let mapleader = ","
 
+" Set SuperTab to use context completion
+let g:SuperTabDefaultCompletionType = "context"
+
 " Make sure the latex plugin loads properly
 "let g:tex_flavor='latex'
 
