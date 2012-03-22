@@ -13,6 +13,12 @@ let mapleader = ","
 " Set SuperTab to use context completion
 let g:SuperTabDefaultCompletionType = "context"
 
+" Change ctrlp to use ,t
+let g:ctrlp_map = '<leader>t'
+
+" Use fancy symbols
+let g:Powerline_symbols = 'fancy'
+
 " Make sure the latex plugin loads properly
 "let g:tex_flavor='latex'
 
@@ -91,8 +97,12 @@ set wildmenu
 "   - on second <Tab>, complete the next full match and show menu
 set wildmode=list:longest,full
 
-" Ignore node_modules and ruby gems files
+" Ignore files
+set wildignore+=.git
 set wildignore+=node_modules/**,vendor/bundle
+set wildignore+=app/public/js/src/dojo-1.6.1,app/public/js/src/dojo-1.6.1-src
+set wildignore+=app/public/js/release,app/resource/data/node_connections
+set wildignore+=app/public/img/nodes
 
 " Remember things between sessions
 "
@@ -140,6 +150,9 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 " Easily edit the vimrc file with ,ev
 nmap <leader>ev :e $MYVIMRC<CR>
 
+" Map ConqueTermSplit to ,cz
+nmap <leader>cz :ConqueTermSplit zsh<CR>
+
 " Indent cursor in block after {[( characters
 inoremap {<CR> {<CR>}<C-O>O
 inoremap [<CR> [<CR>]<C-O>O
@@ -147,9 +160,6 @@ inoremap (<CR> (<CR>)<C-O>O
 
 " Map Gundo to ,u
 nnoremap <leader>u :GundoToggle<CR>
-
-"Map CommandTFlush to ,ct
-nnoremap <leader>ct :CommandTFlush<CR>
 
 " Remap filetab controls
 map  <C-l> :tabn<CR>
@@ -164,6 +174,12 @@ map <A-6> 6gt
 map <A-7> 7gt
 map <A-8> 8gt
 map <A-9> 9gt
+
+" Remap buffer resize
+if bufwinnr(1)
+  map + <C-W>+
+  map - <C-W>-
+endif
 
 " Visual shifting
 vnoremap < <gv
@@ -263,8 +279,6 @@ set gfn=Inconsolata-dz\ 10
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
-" Ignore Dojo files in CommandT
-set wildignore+=app/public/js/src/dojo-1.6.1,app/public/js/src/dojo-1.6.1-src,app/public/js/release,app/resource/data/node_connections,app/public/img/nodes
 
 " Gvim settings
 if has("gui_running")
