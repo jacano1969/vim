@@ -16,8 +16,31 @@ let g:SuperTabDefaultCompletionType = "context"
 " Change ctrlp to use ,t
 let g:ctrlp_map = '<leader>t'
 
+" Have ctrlp use the directory we're currently in
+let g:ctrlp_working_path_mode = 0
+
 " Use fancy symbols
 let g:Powerline_symbols = 'fancy'
+
+" Use solarized colors for RainbowParentheses
+let g:rbpt_colorpairs = [
+    \ ['brown',       "#ffffd7"],
+    \ ['Darkblue',    "#af8700"],
+    \ ['darkgray',    "#d75f00"],
+    \ ['darkgreen',   "#af0000"],
+    \ ['darkcyan',    "#5f5faf"],
+    \ ['darkred',     "#0087ff"],
+    \ ['darkmagenta', "#00afaf"],
+    \ ['brown',       "#5f8700"],
+    \ ['gray',        "#ffffd7"],
+    \ ['black',       "#af8700"],
+    \ ['darkmagenta', "#d75f00"],
+    \ ['Darkblue',    "#af0000"],
+    \ ['darkgreen',   "#5f5faf"],
+    \ ['darkcyan',    "#0087ff"],
+    \ ['darkred',     "#00afaf"],
+    \ ['red',         "#5f8700"],
+    \ ]
 
 " Make sure the latex plugin loads properly
 "let g:tex_flavor='latex'
@@ -147,6 +170,17 @@ set statusline+=%*
 " Show current git branch
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
+" Disable folding
+set nofoldenable
+
+" Set font
+set gfn=Inconsolata-dz\ 10
+
+" Disable bell
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+
 " Easily edit the vimrc file with ,ev
 nmap <leader>ev :e $MYVIMRC<CR>
 
@@ -240,13 +274,6 @@ nmap <F7> :g#\({\n\)\@<=#.,/}/sort<CR>
 " Source the vimrc file after saving it
 autocmd bufwritepost .vimrc,vimrc source $MYVIMRC
 
-" Highlight lines with more than 80 columns
-"if exists('+colorcolumn')
-"  set colorcolumn=80
-"else
-  "au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-"endif
-
 fun! <SID>StripTrailingWhitespaces()
     let _s=@/
     let l = line(".")
@@ -269,16 +296,11 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal 
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview
 
-" Disable folding
-set nofoldenable
-
-" Set font
-set gfn=Inconsolata-dz\ 10
-
-" Disable bell
-set noerrorbells visualbell t_vb=
-autocmd GUIEnter * set visualbell t_vb=
-
+" Toggle RainbowParentheses automatically
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 " Gvim settings
 if has("gui_running")
