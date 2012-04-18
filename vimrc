@@ -42,6 +42,12 @@ let g:rbpt_colorpairs = [
     \ ['red',         "#5f8700"],
     \ ]
 
+" For REPL
+let vimclojure#WantNailgun = 1
+
+" Put VimClojure windows on the right
+let vimclojure#SplitPos = "right"
+
 " Make sure the latex plugin loads properly
 "let g:tex_flavor='latex'
 
@@ -264,6 +270,10 @@ nnoremap <leader>v V`]
 
 " Vertically split a window and go to it
 nnoremap <leader>s <C-w>v<C-w>l
+
+" Easily move between vertical splits
+nnoremap H <C-w>h
+nnoremap L <C-w>l
 
 " Ack - betterthangrep.com
 nnoremap <leader>z :Ack
