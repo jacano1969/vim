@@ -4,6 +4,10 @@ let PHP_autoformatcomment = 1
 setlocal autoindent
 setlocal smartindent
 
+setlocal shiftwidth=4
+setlocal softtabstop=4
+setlocal tabstop=4
+
 " Linewidth to 79, because of the formatoptions this is only valid for comments
 set formatoptions=qrocb
 

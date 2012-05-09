@@ -312,6 +312,9 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+" Don't use delimitmate with .clj
+au FileType clojure let b:delimitMate_autoclose = 0
+
 " Gvim settings
 if has("gui_running")
     " Remove menu bar
