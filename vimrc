@@ -7,6 +7,9 @@ filetype off                    " force reloading *after* pathogen loaded
 call pathogen#infect()
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 
+" Turn syntax highlighting on
+syntax on
+
 " Set the <Leader> for combo commands
 let mapleader = ","
 
@@ -22,25 +25,19 @@ let g:ctrlp_working_path_mode = 0
 " Use fancy symbols
 let g:Powerline_symbols = 'fancy'
 
-" Use solarized colors for RainbowParentheses
-let g:rbpt_colorpairs = [
-    \ ['brown',       "#ffffd7"],
-    \ ['Darkblue',    "#af8700"],
-    \ ['darkgray',    "#d75f00"],
-    \ ['darkgreen',   "#af0000"],
-    \ ['darkcyan',    "#5f5faf"],
-    \ ['darkred',     "#0087ff"],
-    \ ['darkmagenta', "#00afaf"],
-    \ ['brown',       "#5f8700"],
-    \ ['gray',        "#ffffd7"],
-    \ ['black',       "#af8700"],
-    \ ['darkmagenta', "#d75f00"],
-    \ ['Darkblue',    "#af0000"],
-    \ ['darkgreen',   "#5f5faf"],
-    \ ['darkcyan',    "#0087ff"],
-    \ ['darkred',     "#00afaf"],
-    \ ['red',         "#5f8700"],
-    \ ]
+let vimclojure#ParenRainbow = 1
+let vimclojure#ParenRainbowColors = {
+    \ '0': "guifg=#268bd2",
+    \ '1': "guifg=#2aa198",
+    \ '2': "guifg=#859900",
+    \ '3': "guifg=#6c71c4",
+    \ '4': "guifg=#d75f00",
+    \ '5': "guifg=#fdf6e3",
+    \ '6': "guifg=#b58900",
+    \ '7': "guifg=#cb4b16",
+    \ '8': "guifg=#586e75",
+    \ '9': "guifg=#dc322f"
+    \ }
 
 " For REPL
 let vimclojure#WantNailgun = 1
@@ -53,9 +50,6 @@ let vimclojure#SplitPos = "right"
 
 " Avoid loading MatchParen plugin
 " let loaded_matchparen = 1
-
-" Turn syntax highlighting on
-syntax on
 
 " Set color scheme
 set background=dark
@@ -128,10 +122,10 @@ set wildmode=list:longest,full
 
 " Ignore files
 set wildignore+=.git
-set wildignore+=node_modules/**,vendor/bundle
-set wildignore+=app/public/js/src/dojo-1.6.1,app/public/js/src/dojo-1.6.1-src
-set wildignore+=app/public/js/release,app/resource/data/node_connections
-set wildignore+=app/public/img/nodes
+set wildignore+=/**/node_modules/**,/**/vendor
+set wildignore+=/**/app/public/js/src/dojo-1.6.1,/**/app/public/js/src/dojo-1.6.1-src
+set wildignore+=/**/app/public/js/release,/**/app/resource/data/node_connections
+set wildignore+=/**/app/public/img/nodes
 
 " Remember things between sessions
 "
@@ -305,12 +299,6 @@ au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal 
 " Enable folding without the use of markers
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview
-
-" Toggle RainbowParentheses automatically
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
 
 " Don't use delimitmate with .clj
 au FileType clojure let b:delimitMate_autoclose = 0
