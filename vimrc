@@ -25,6 +25,8 @@ let g:ctrlp_working_path_mode = 0
 " Use fancy symbols
 let g:Powerline_symbols = 'fancy'
 
+
+" VimClojure settings
 let vimclojure#ParenRainbow = 1
 let vimclojure#ParenRainbowColors = {
     \ '0': "guifg=#268bd2",
@@ -39,11 +41,28 @@ let vimclojure#ParenRainbowColors = {
     \ '9': "guifg=#dc322f"
     \ }
 
-" For REPL
 let vimclojure#WantNailgun = 1
-
-" Put VimClojure windows on the right
 let vimclojure#SplitPos = "right"
+
+let vimfiles=$HOME . "/.vim"
+let sep=":"
+
+let classpath = join(
+   \[".",
+   \ "src", "src/main/clojure", "src/main/resources",
+   \ "test", "src/test/clojure", "src/test/resources",
+   \ "classes", "target/classes",
+   \ "lib/*", "lib/dev/*",
+   \ "bin",
+   \ vimfiles."/lib/*"
+   \],
+   \ sep)
+
+let nailgunRoot = vimfiles."/bundle/nailgun"
+let vimclojure#HighlightContrib=1
+let vimclojure#DynamicHighlighting=1
+let vimclojure#NailgunClient = nailgunRoot."/lib/nailgun/ng"
+
 
 " Make sure the latex plugin loads properly
 "let g:tex_flavor='latex'
@@ -219,6 +238,9 @@ endif
 vnoremap < <gv
 vnoremap > >gv
 
+" Start vimclojure nailgun server (uses screen.vim to manage lifetime)
+nmap <silent> <Leader>sc :execute "ScreenShell java -cp \"" . classpath . sep . nailgunRoot . "/lib/*" . "\" vimclojure.nailgun.NGServer 127.0.0.1" <cr>
+
 " Bubble lines
 nmap <C-A-k> [e
 nmap <C-A-j> ]e
@@ -274,9 +296,6 @@ nnoremap <leader>z :Ack
 
 " Sorts CSS (content between the braces)
 nmap <F7> :g#\({\n\)\@<=#.,/}/sort<CR>
-
-" Source the vimrc file after saving it
-autocmd bufwritepost .vimrc,vimrc source $MYVIMRC
 
 fun! <SID>StripTrailingWhitespaces()
     let _s=@/
