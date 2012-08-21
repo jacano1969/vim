@@ -13,9 +13,6 @@ syntax on
 " Set the <Leader> for combo commands
 let mapleader = ","
 
-" Set SuperTab to use context completion
-let g:SuperTabDefaultCompletionType = "context"
-
 " Change ctrlp to use ,t
 let g:ctrlp_map = '<leader>t'
 
@@ -206,6 +203,10 @@ nmap <leader>ev :e $MYVIMRC<CR>
 " Map ConqueTermSplit to ,cz
 nmap <leader>cz :ConqueTermSplit zsh<CR>
 
+" Easier CtrlP commands
+nmap <leader>r :CtrlPBuffer<CR>
+nmap <leader>m :CtrlPMRUFiles<CR>
+
 " Indent cursor in block after {[( characters
 inoremap {<CR> {<CR>}<C-O>O
 inoremap [<CR> [<CR>]<C-O>O
@@ -239,7 +240,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Start vimclojure nailgun server (uses screen.vim to manage lifetime)
-nmap <silent> <Leader>sc :execute "ScreenShell java -cp \"" . classpath . sep . nailgunRoot . "/lib/*" . "\" vimclojure.nailgun.NGServer 127.0.0.1" <cr>
+nmap <silent> <Leader>ng :execute "ScreenShell java -cp \"" . classpath . sep . nailgunRoot . "/lib/*" . "\" vimclojure.nailgun.NGServer 127.0.0.1" <cr>
 
 " Bubble lines
 nmap <C-A-k> [e

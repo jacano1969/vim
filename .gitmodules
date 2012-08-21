@@ -94,9 +94,6 @@
 [submodule "bundle/python-indent"]
 	path = bundle/python-indent
 	url = https://github.com/gg/python.vim.git
-[submodule "bundle/matchit"]
-	path = bundle/matchit
-	url = https://github.com/vim-scripts/matchit.zip.git
 [submodule "bundle/zencoding"]
 	path = bundle/zencoding
 	url = https://github.com/mattn/zencoding-vim.git
@@ -106,3 +103,9 @@
 [submodule "bundle/refheap"]
 	path = bundle/refheap
 	url = https://github.com/Raynes/refheap.vim.git
+[submodule "bundle/matchit"]
+	path = bundle/matchit
+	url = git://github.com/vim-scripts/matchit.zip.git
+[submodule "bundle/supertab"]
+	path = bundle/supertab
+	url = https://github.com/ervandew/supertab.git
