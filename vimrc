@@ -249,8 +249,8 @@ vmap <C-A-k> [egv
 vmap <C-A-j> ]egv
 
 " map <Alt-p> and <Alt-P> to paste below/above and reformat
-nnoremap <Esc>P  P'[v']=
-nnoremap <Esc>p  p'[v']=
+nnoremap <A-P> P'[v']=
+nnoremap <A-p> p'[v']=
 
 " map ,f to display all lines with keyword under cursor and ask which one to jump to
 nmap ,f [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
