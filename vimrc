@@ -22,6 +22,8 @@ let g:ctrlp_working_path_mode = 0
 " Use fancy symbols
 let g:Powerline_symbols = 'fancy'
 
+" Set Taglist width
+let Tlist_WinWidth = 50
 
 " VimClojure settings
 let vimclojure#ParenRainbow = 1
@@ -38,6 +40,7 @@ let vimclojure#ParenRainbowColors = {
     \ '9': "guifg=#dc322f"
     \ }
 
+let vimclojure#FuzzyIndent = 1
 let vimclojure#WantNailgun = 1
 let vimclojure#SplitPos = "right"
 
@@ -183,6 +186,7 @@ set textwidth=0
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
 " Show current git branch
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
@@ -196,6 +200,8 @@ set gfn=Inconsolata-dz\ 10
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
+" Disable scroll binding
+set noscrollbind
 
 " Easily edit the vimrc file with ,ev
 nmap <leader>ev :e $MYVIMRC<CR>
