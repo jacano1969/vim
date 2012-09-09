@@ -45,8 +45,19 @@ let vimclojure#WantNailgun = 1
 let vimclojure#SplitPos = "right"
 
 let vimfiles = $HOME . "/.vim"
+let sep = ":"
 " There must be a copy of clojure-1.4.0.jar in ~/.vim/lib
-let classpath = vimfiles."/lib/*"
+let classpath = join(
+   \[".",
+   \ "src", "src/main/clojure", "src/main/resources",
+   \ "test", "src/test/clojure", "src/test/resources",
+   \ "classes", "target/classes",
+   \ "lib/*", "lib/dev/*",
+   \ "bin",
+   \ vimfiles."/lib/*"
+   \],
+   \ sep)
+
 let nailgunRoot = vimfiles."/bundle/nailgun"
 let vimclojure#HighlightContrib=1
 let vimclojure#DynamicHighlighting=1
@@ -235,7 +246,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Start vimclojure nailgun server (uses screen.vim to manage lifetime)
-nmap <silent> <Leader>ng :execute "ScreenShell java -cp \"" . classpath . ":" . nailgunRoot . "/lib/*" . "\" vimclojure.nailgun.NGServer 127.0.0.1" <cr>
+nmap <silent> <Leader>ng :execute "ScreenShell java -cp \"" . classpath . sep . nailgunRoot . "/lib/*" . "\" vimclojure.nailgun.NGServer 127.0.0.1" <cr>
 
 " Bubble lines
 nmap <C-A-k> [e
