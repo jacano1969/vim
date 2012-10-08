@@ -46,6 +46,9 @@ let vimclojure#HighlightContrib = 1
 let vimclojure#DynamicHighlighting = 1
 let vimclojure#NailgunClient = $HOME."/.vim/bundle/nailgun/lib/nailgun/ng"
 
+" SLIMV settings
+let g:slimv_swank_cmd = '! xterm -e sbcl --load /home/nick/.vim/bundle/slimv/slime/start-swank.lisp &'
+
 " Make sure the latex plugin loads properly
 "let g:tex_flavor='latex'
 
@@ -185,6 +188,9 @@ autocmd GUIEnter * set visualbell t_vb=
 " Disable scroll binding
 set noscrollbind
 
+" Split horizontal windows below current window
+set splitbelow
+
 " Easily edit the vimrc file with ,ev
 nmap <leader>ev :e $MYVIMRC<CR>
 
@@ -272,6 +278,9 @@ nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " Auto-select text that was just pasted in
 nnoremap <leader>v V`]
+
+" Vertically split a window and go to it (requires "set splitbelow")
+nnoremap <leader>S <C-w>s
 
 " Vertically split a window and go to it
 nnoremap <leader>s <C-w>v<C-w>l
