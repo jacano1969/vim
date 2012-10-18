@@ -109,3 +109,9 @@
 [submodule "bundle/zencoding-vim"]
 	path = bundle/zencoding-vim
 	url = git://github.com/mattn/zencoding-vim.git
+[submodule "bundle/base16-vim"]
+	path = bundle/base16-vim
+	url = git://github.com/chriskempson/base16-vim.git
+[submodule "bundle/vim-lua-ftplugin"]
+	path = bundle/vim-lua-ftplugin
+	url = git://github.com/xolox/vim-lua-ftplugin.git

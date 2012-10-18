@@ -57,7 +57,8 @@ let g:slimv_swank_cmd = '! xterm -e sbcl --load /home/nick/.vim/bundle/slimv/sli
 
 " Set color scheme
 set background=dark
-colorscheme solarized
+"colorscheme base16-railscasts
+colorscheme Tomorrow-Night
 
 " Hide buffers instead of closing them
 set hidden
@@ -235,6 +236,8 @@ vnoremap > >gv
 
 " Start vimclojure nailgun server (uses screen.vim to manage lifetime)
 nmap <silent> <Leader>ng :execute "ScreenShell lein vimclojure" <cr>
+" Kill vimclojure nailgun server
+nmap <silent> <Leader>nk :execute "ScreenQuit" <cr>
 
 " Bubble lines
 nmap <C-A-k> [e
