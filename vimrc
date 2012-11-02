@@ -198,6 +198,10 @@ nmap <leader>ev :e $MYVIMRC<CR>
 " Map ConqueTermSplit to ,cz
 nmap <leader>cz :ConqueTermSplit zsh<CR>
 
+" Map K to show man pages using ConqueTerm
+map K :<C-U>call ConqueMan()<CR>
+ounmap K
+
 " Easier CtrlP commands
 nmap <leader>r :CtrlPBuffer<CR>
 nmap <leader>m :CtrlPMRUFiles<CR>
@@ -279,6 +283,9 @@ nnoremap <silent><A-z> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
 nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
+" Horizontal split for ri.vim
+nnoremap <leader>d :call ri#OpenSearchPrompt(0)<cr>
+
 " Auto-select text that was just pasted in
 nnoremap <leader>v V`]
 
@@ -309,6 +316,20 @@ endfun
 
 " Autostrip trailing whitespace
 autocmd BufWritePre *.* :call <SID>StripTrailingWhitespaces()
+
+" Opens man pages using ConqueTerm
+fun! ConqueMan()
+    let cmd = &keywordprg . ' '
+    if cmd ==# 'man ' || cmd ==# 'man -s '
+        if v:count > 0
+            let cmd .= v:count . ' '
+        else
+            let cmd = 'man '
+        endif
+    endif
+    let cmd .= expand('<cword>')
+    execute 'ConqueTermSplit' cmd
+endfun
 
 " Don't display annoying popup every time a file changes
 autocmd FileChangedShell * echohl WarningMsg | echo "File changed shell." | echohl None

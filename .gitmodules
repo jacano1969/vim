@@ -115,3 +115,9 @@
 [submodule "bundle/vim-lua-ftplugin"]
 	path = bundle/vim-lua-ftplugin
 	url = git://github.com/xolox/vim-lua-ftplugin.git
+[submodule "bundle/ri.vim"]
+	path = bundle/ri.vim
+	url = https://github.com/danchoi/ri.vim
+[submodule "bundle/pydoc.vim"]
+	path = bundle/pydoc.vim
+	url = git://github.com/fs111/pydoc.vim.git
