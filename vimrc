@@ -119,10 +119,9 @@ set relativenumber
 
 " Save undo history
 set undofile
-set undodir=~/.vim/.vimundo
-
-" Set the number of undo levels
+set undodir=~/.vim/undo
 set undolevels=1000
+set undoreload=10000
 
 " Enable CTRL-A/CTRL-X to work on octal and hex numbers, as well as characters
 set nrformats=octal,hex,alpha
