@@ -1,11 +1,66 @@
 " Ensure that our plugins work properly
 set nocompatible
 
-" Use pathogen to easily modify the runtime path to include all
-" plugins under the ~/.vim/bundle directory
-filetype off                    " force reloading *after* pathogen loaded
-call pathogen#infect()
-filetype plugin indent on       " enable detection, plugins and indenting in one step
+" Use vundle to handle plugins
+filetype off
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+" Github repos
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'bbommarito/vim-slim'
+Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'chriskempson/base16-vim'
+Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'danchoi/ri.vim'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'ervandew/screen'
+Bundle 'ervandew/supertab'
+Bundle 'fs111/pydoc.vim'
+Bundle 'gg/python.vim'
+Bundle 'godlygeek/tabular'
+Bundle 'int3/vim-extradite'
+Bundle 'jcf/vim-latex'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/ctrlp.vim'
+Bundle 'kien/rainbow_parentheses.vim'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'mattn/zencoding-vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'NSinopoli/yaml-vim'
+Bundle 'othree/html5.vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'Raimondi/delimitMate'
+Bundle 'rosenfeld/conque-term'
+Bundle 'scrooloose/syntastic'
+Bundle 'sjbach/lusty'
+Bundle 'sjl/gundo.vim'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-eunuch'
+Bundle 'tpope/vim-foreplay'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'vim-scripts/camelcasemotion'
+Bundle 'vim-scripts/matchparenpp'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'vim-scripts/slimv.vim'
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'vim-scripts/VimClojure'
+Bundle 'vim-scripts/YankRing.vim'
+Bundle 'xolox/vim-lua-ftplugin'
+
+" Enable detection, plugins, and indenting in one step
+filetype plugin indent on
 
 " Turn syntax highlighting on
 syntax on
@@ -40,20 +95,11 @@ let vimclojure#ParenRainbowColors = {
     \ '9': "guifg=#dc322f"
     \ }
 let vimclojure#FuzzyIndent = 1
-let vimclojure#WantNailgun = 1
-let vimclojure#SplitPos = "right"
 let vimclojure#HighlightContrib = 1
 let vimclojure#DynamicHighlighting = 1
-let vimclojure#NailgunClient = $HOME."/.vim/bundle/nailgun/lib/nailgun/ng"
 
 " SLIMV settings
 let g:slimv_swank_cmd = '! xterm -e sbcl --load /home/nick/.vim/bundle/slimv/slime/start-swank.lisp &'
-
-" Make sure the latex plugin loads properly
-"let g:tex_flavor='latex'
-
-" Avoid loading MatchParen plugin
-" let loaded_matchparen = 1
 
 " Set color scheme
 set background=dark
@@ -128,18 +174,20 @@ set wildmode=list:longest,full
 " Ignore files
 set wildignore+=.git
 set wildignore+=/**/node_modules/**,/**/vendor
-set wildignore+=/**/app/public/js/src/dojo-1.6.1,/**/app/public/js/src/dojo-1.6.1-src
-set wildignore+=/**/app/public/js/release,/**/app/resource/data/node_connections
-set wildignore+=/**/app/public/img/nodes
 
 " Remember things between sessions
 "
 " '20  - remember marks for 20 previous files
 " \"80 - save 80 lines for each register
-" :100  - remember 100 items in command-line history
+" :200  - remember 200 items in command-line history
 " %    - remember the buffer list (if vim started without a file arg)
 " n    - set name of viminfo file
-set viminfo='20,\"80,:100,%,n~/.viminfo
+set viminfo='20,\"80,:200,%,n~/.viminfo
+
+" Cache clojure class path
+set viminfo+=!
+
+set history=200
 
 " Search/replace "globally" (on a line) by default
 set gdefault
@@ -201,6 +249,10 @@ nmap <leader>cz :ConqueTermSplit zsh<CR>
 " Map K to show man pages using ConqueTerm
 map K :<C-U>call ConqueMan()<CR>
 ounmap K
+
+" Scroll through command history without needing to use the arrow keys
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 " Easier CtrlP commands
 nmap <leader>r :CtrlPBuffer<CR>
@@ -277,6 +329,9 @@ vnoremap <Tab> %
 " No longer need to press the Shift key for commands
 nnoremap ; :
 
+" Press ; twice to get original functionality
+noremap ;; ;
+
 " Alt-x/z deletes blank line below/above, and Alt-j/k inserts.
 nnoremap <silent><A-x> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><A-z> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
@@ -333,6 +388,9 @@ endfun
 
 " Don't display annoying popup every time a file changes
 autocmd FileChangedShell * echohl WarningMsg | echo "File changed shell." | echohl None
+
+" Use jquery syntax file
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
 " Go back to the position the cursor was on the last time this file was edited
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal `\"")|endif
