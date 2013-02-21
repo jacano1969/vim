@@ -10,8 +10,8 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Github repos
+Bundle 'adimit/prolog.vim'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'bbommarito/vim-slim'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'chriskempson/base16-vim'
 Bundle 'chriskempson/vim-tomorrow-theme'
@@ -22,6 +22,7 @@ Bundle 'ervandew/supertab'
 Bundle 'fs111/pydoc.vim'
 Bundle 'gg/python.vim'
 Bundle 'godlygeek/tabular'
+Bundle 'guns/vim-clojure-static'
 Bundle 'int3/vim-extradite'
 Bundle 'jcf/vim-latex'
 Bundle 'kchmck/vim-coffee-script'
@@ -31,6 +32,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'mattn/zencoding-vim'
 Bundle 'mileszs/ack.vim'
+Bundle 'NSinopoli/paredit.vim'
 Bundle 'NSinopoli/yaml-vim'
 Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
@@ -39,23 +41,23 @@ Bundle 'rosenfeld/conque-term'
 Bundle 'scrooloose/syntastic'
 Bundle 'sjbach/lusty'
 Bundle 'sjl/gundo.vim'
+Bundle 'slim-template/vim-slim'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-eunuch'
 Bundle 'tpope/vim-foreplay'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
+Bundle 'vim-pandoc/vim-pandoc'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'vim-scripts/camelcasemotion'
 Bundle 'vim-scripts/matchparenpp'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'vim-scripts/slimv.vim'
 Bundle 'vim-scripts/taglist.vim'
-Bundle 'vim-scripts/VimClojure'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'xolox/vim-lua-ftplugin'
 
@@ -80,23 +82,22 @@ let g:Powerline_symbols = 'fancy'
 " Set Taglist width
 let Tlist_WinWidth = 50
 
-" VimClojure settings
-let vimclojure#ParenRainbow = 1
-let vimclojure#ParenRainbowColors = {
-    \ '0': "guifg=#268bd2",
-    \ '1': "guifg=#2aa198",
-    \ '2': "guifg=#859900",
-    \ '3': "guifg=#6c71c4",
-    \ '4': "guifg=#d75f00",
-    \ '5': "guifg=#fdf6e3",
-    \ '6': "guifg=#b58900",
-    \ '7': "guifg=#cb4b16",
-    \ '8': "guifg=#586e75",
-    \ '9': "guifg=#dc322f"
-    \ }
-let vimclojure#FuzzyIndent = 1
-let vimclojure#HighlightContrib = 1
-let vimclojure#DynamicHighlighting = 1
+" Use ag instead of ack - https://github.com/ggreer/the_silver_searcher
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" Colors for RainbowParentheses
+let g:rbpt_colorpairs = [
+    \ ['brown',       '#268bd2'],
+    \ ['Darkblue',    '#2aa198'],
+    \ ['darkgray',    '#859900'],
+    \ ['darkgreen',   '#6c71c4'],
+    \ ['darkcyan',    '#d75f00'],
+    \ ['darkred',     '#fdf6e3'],
+    \ ['darkmagenta', '#b58900'],
+    \ ['brown',       '#cb4b16'],
+    \ ['gray',        '#586e75'],
+    \ ['black',       '#dc322f'],
+    \ ]
 
 " SLIMV settings
 let g:slimv_swank_cmd = '! xterm -e sbcl --load /home/nick/.vim/bundle/slimv/slime/start-swank.lisp &'
@@ -289,11 +290,6 @@ endif
 vnoremap < <gv
 vnoremap > >gv
 
-" Start vimclojure nailgun server (uses screen.vim to manage lifetime)
-nmap <silent> <Leader>ng :execute "ScreenShell lein vimclojure" <cr>
-" Kill vimclojure nailgun server
-nmap <silent> <Leader>nk :execute "ScreenQuit" <cr>
-
 " Bubble lines
 nmap <C-A-k> [e
 nmap <C-A-j> ]e
@@ -388,9 +384,6 @@ endfun
 " Don't display annoying popup every time a file changes
 autocmd FileChangedShell * echohl WarningMsg | echo "File changed shell." | echohl None
 
-" Use jquery syntax file
-au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
-
 " Go back to the position the cursor was on the last time this file was edited
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")|execute("normal `\"")|endif
 
@@ -400,6 +393,12 @@ au BufWinEnter * silent! loadview
 
 " Don't use delimitmate with .clj
 au FileType clojure let b:delimitMate_autoclose = 0
+
+" Toggle RainbowParentheses automatically
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 " Gvim settings
 if has("gui_running")
